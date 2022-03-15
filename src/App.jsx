@@ -35,7 +35,7 @@ function App() {
     </form>
     <div className='grocery-container'>
       <List items={list}/>
-      <button className='clear-btn'>Clear All</button>
+      <button className='clear-btn' onClick={() => setList([])}>Clear All</button>
     </div>
   </section>
 }
