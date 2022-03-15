@@ -11,7 +11,15 @@ function App() {
 
   const handleSubmit = e =>{
     e.preventDefault();
-    console.log(e.target.value)
+    if (!name) {
+      // display alert
+    }
+    if (name && isEditing) {
+      //edit mode
+    }
+    const newItem = {id: new Date().getTime().toString(), title:name};
+    setList([...list, newItem]);
+    setName('')
   }
 
   return <section className='section-center'>
@@ -19,14 +27,14 @@ function App() {
       {alert.show && <Alert/>}
       <h3>Grocery bud</h3>
       <div className='form-control'>
-        <input type='text'className='grocery' placeholder='eggs...'/>
+        <input type='text'className='grocery' placeholder='eggs...' value={name} onChange={(e) => setName(e.target.value)}/>
         <button type='submit' className='submit-btn'>
           {isEditing ? 'edit':'submit'}
         </button>
       </div>
     </form>
     <div className='grocery-container'>
-      <List/>
+      <List items={list}/>
       <button className='clear-btn'>Clear All</button>
     </div>
   </section>
