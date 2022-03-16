@@ -9,22 +9,30 @@ function App() {
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({show: false, msg: '', type: ''});
 
+
   const handleSubmit = e =>{
     e.preventDefault();
     if (!name) {
-      // display alert
+      showAlert(true, 'please enter a item', 'danger');
     }
     if (name && isEditing) {
-      //edit mode
+      //edit item
+      console.log('editing mode!!!!!')
     }
     const newItem = {id: new Date().getTime().toString(), title:name};
     setList([...list, newItem]);
     setName('')
   }
 
+
+  function showAlert(show=false, msg='', type='') {
+    return setAlert({show, msg, type});
+  }
+
+
   return <section className='section-center'>
     <form className='grocery-form' onSubmit={handleSubmit}>
-      {alert.show && <Alert/>}
+      {alert.show && <Alert {...alert}/>}
       <h3>Grocery bud</h3>
       <div className='form-control'>
         <input type='text'className='grocery' placeholder='eggs...' value={name} onChange={(e) => setName(e.target.value)}/>
